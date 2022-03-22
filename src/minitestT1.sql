@@ -76,6 +76,5 @@ SELECT *FROM Student WHERE idStudent ='12';
 
 SELECT C.idClasses , COUNT(S.idStudent) as 'so hoc sinh' FROM Class C join student s on C.idClasses = s.idClasses GROUP BY C.idClasses;
 SELECT Adress , COUNT(S.idStudent) as 'so hoc sinh' FROM Adress A join Student S on A.idAdress = S.idAdress GROUP BY A.Adress;
-SELECT C.idCourse, AVG(P.point)as 'diemTB' From Course C join Point P on C.idCourse = P.idCourse GROUP BY C.idCourse;
-CREATE TABLE avgPoint SELECT C.idCourse, AVG(P.point)as 'diemTB' From Course C join Point P on C.idCourse = P.idCourse GROUP BY C.idCourse;
-SELECT idCourse,Max(`diemTB`)FROM avgPoint;
+SELECT C.idCourse,C.nameCourse, AVG(P.point)as 'diemTB' From Course C join Point P on C.idCourse = P.idCourse GROUP BY C.idCourse
+having diemTB>=ALL(SELECT AVG(P.point)as 'diemTB' From Course C join Point P on C.idCourse = P.idCourse GROUP BY C.idCourse );
